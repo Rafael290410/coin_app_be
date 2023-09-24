@@ -1,0 +1,13 @@
+sequenceDiagram
+    actor u as Users
+    participant fe as Front-End (react native)
+    participant cs as CoinService
+    participant cg as CoinGeckoAPI
+    u ->> fe: open coin rate menu
+    fe ->> cs: HTTP_Request (GET) /coin-rate
+    cs ->> cg : HTTP_Request (GET) api.coingecko.com/api/v3/exchange_rates 
+    note right of cg: exchange rate
+    cg -->> cs: JSON
+    cs ->> cs: decoding JSON
+    cs -->> fe: exchange rate
+    fe -->> u: coin rate menu
